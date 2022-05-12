@@ -30,10 +30,7 @@ export const GPRoute = ({ component: Component, ...rest }) => {
   const [pose, setPose] = React.useState(undefined);
   const [poseSelected, setPoseSelected] = React.useState("default");
   // Selected category State Hook
-  const [category, setCategory] = React.useState({
-    name: "head",
-    sideIndicator: false,
-  });
+  const [category, setCategory] = React.useState("color");
   // 3D Model Content State Hooks ( Scene, Nodes, Materials, Animations e.t.c ) //
 
   const [model, setModel] = React.useState<object>(Object);
@@ -45,6 +42,25 @@ export const GPRoute = ({ component: Component, ...rest }) => {
   // States Hooks used in template editor //
   const [templateInfo, setTemplateInfo] = React.useState<object>();
   const [randomize, setRandomize] = React.useState<boolean>(false);
+  const [downloadPopup, setDownloadPopup] = React.useState<boolean>(false);
+  const [mintPopup, setMintPopup] = React.useState<boolean>(false);
+
+  // MINT INFORMATION HOOKs
+
+  const [avatarCategory, setAvatarCategory] = React.useState<number>(0);
+  const [gender, setGender] = React.useState<number>(0);
+
+  const [ totalToBeMintedDom , setTotalToBeMintedDom ] = React.useState<number>(5000);
+  const [ totalMintedDom , setTotalMintedDom ] = React.useState<number>(0);
+  const [ totalToBeMintedSub , setTotalToBeMintedSub ] = React.useState<number>(5000);
+  const [ totalMintedSub , setTotalMintedSub ] = React.useState<number>(0);
+
+  const [ allowedToMint , setAllowedToMint ] = React.useState<number>(0);
+
+  const [ mintPrice , setMintPrice ] = React.useState<number>(0.05);
+  const [ mintPricePublic , setMintPricePublic ] = React.useState<number>(0.069);
+
+
 
   return (
     <Route
@@ -60,6 +76,20 @@ export const GPRoute = ({ component: Component, ...rest }) => {
               setNavigation,
               modelLoaded,
               setModelLoaded,
+              totalToBeMintedDom,
+              setTotalToBeMintedDom,
+              totalMintedDom,
+              setTotalMintedDom,
+              totalMintedSub,
+              setTotalMintedSub,
+              totalToBeMintedSub,
+              setTotalToBeMintedSub,
+              allowedToMint,
+              setAllowedToMint,
+              mintPrice,
+              setMintPrice,
+              mintPricePublic,
+              setMintPricePublic,
               // ----- Navigation Categories / State Hooks ----- //
               categories,
               setCategories,
@@ -85,6 +115,15 @@ export const GPRoute = ({ component: Component, ...rest }) => {
               setTemplateInfo,
               randomize,
               setRandomize,
+              downloadPopup,
+              setDownloadPopup,
+              mintPopup,
+              setMintPopup,
+              // ----- Avatar Selete Category ---- //
+              avatarCategory,
+              setAvatarCategory,
+              gender,
+              setGender
             }}
           >
             <Component {...props} />
