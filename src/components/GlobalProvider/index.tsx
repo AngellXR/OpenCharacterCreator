@@ -30,10 +30,7 @@ export const GPRoute = ({ component: Component, ...rest }) => {
   const [pose, setPose] = React.useState(undefined);
   const [poseSelected, setPoseSelected] = React.useState("default");
   // Selected category State Hook
-  const [category, setCategory] = React.useState({
-    name: "head",
-    sideIndicator: false,
-  });
+  const [category, setCategory] = React.useState("color");
   // 3D Model Content State Hooks ( Scene, Nodes, Materials, Animations e.t.c ) //
 
   const [model, setModel] = React.useState<object>(Object);
@@ -45,6 +42,36 @@ export const GPRoute = ({ component: Component, ...rest }) => {
   // States Hooks used in template editor //
   const [templateInfo, setTemplateInfo] = React.useState<object>();
   const [randomize, setRandomize] = React.useState<boolean>(false);
+  const [downloadPopup, setDownloadPopup] = React.useState<boolean>(false);
+  const [mintPopup, setMintPopup] = React.useState<boolean>(false);
+
+  // MINT INFORMATION HOOKs
+
+  const [avatarCategory, setAvatarCategory] = React.useState<number>(0);
+  const [gender, setGender] = React.useState<number>(0);
+
+  const [template, setTemplate] = React.useState<number>(0);
+
+  const [loadingModelProgress, setLoadingModelProgress] = React.useState<number>(0);
+
+  const [ totalToBeMinted , setTotalToBeMinted ] = React.useState<number>(10000);
+  const [ totalMinted , setTotalMinted ] = React.useState<number>(0);
+
+  const [ mintPrice , setMintPrice ] = React.useState<string>("0.05");
+  const [ mintPricePublic , setMintPricePublic ] = React.useState<string>("0.069");
+
+  const [ skin , setSkin ] = React.useState<any>();
+  const [ hair , setHair ] = React.useState<any>();
+  const [ face , setFace ] = React.useState<any>();
+  const [ tops , setTops ] = React.useState<any>();
+  const [ arms , setArms ] = React.useState<any>();
+  const [ neck , setNeck ] = React.useState<any>();
+  const [ bottoms , setBottoms ] = React.useState<any>();
+  const [ shoes , setShoes ] = React.useState<any>();
+  const [ legs , setLegs ] = React.useState<any>();
+  const [ accessories , setAccessories ] = React.useState<any>();
+
+
 
   return (
     <Route
@@ -53,6 +80,27 @@ export const GPRoute = ({ component: Component, ...rest }) => {
         return (
           <GlobalContext.Provider
             value={{
+              // ----- Selected Traits Hooks -------- //
+              skin,
+              setSkin,
+              hair,
+              setHair,
+              face,
+              setFace,
+              tops,
+              setTops,
+              arms,
+              setArms,
+              neck,
+              setNeck,
+              bottoms,
+              setBottoms,
+              shoes,
+              setShoes,
+              legs,
+              setLegs,
+              accessories,
+              setAccessories,
               // ----- General Use State Hooks ------ //
               generator,
               setGenerator,
@@ -60,6 +108,14 @@ export const GPRoute = ({ component: Component, ...rest }) => {
               setNavigation,
               modelLoaded,
               setModelLoaded,
+              totalToBeMinted,
+              setTotalToBeMinted,
+              totalMinted,
+              setTotalMinted,
+              mintPrice,
+              setMintPrice,
+              mintPricePublic,
+              setMintPricePublic,
               // ----- Navigation Categories / State Hooks ----- //
               categories,
               setCategories,
@@ -80,11 +136,24 @@ export const GPRoute = ({ component: Component, ...rest }) => {
               setMaterials,
               animations,
               setAnimations,
+              loadingModelProgress,
+              setLoadingModelProgress,
               // ----- Template State Hooks ----- //
+              template,
+              setTemplate,
               templateInfo,
               setTemplateInfo,
               randomize,
               setRandomize,
+              downloadPopup,
+              setDownloadPopup,
+              mintPopup,
+              setMintPopup,
+              // ----- Avatar Select Category ---- //
+              avatarCategory,
+              setAvatarCategory,
+              gender,
+              setGender
             }}
           >
             <Component {...props} />
